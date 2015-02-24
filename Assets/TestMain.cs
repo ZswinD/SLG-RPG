@@ -4,11 +4,8 @@ using System.Collections.Generic;
 
 public class TestMain : MonoBehaviour {
 	void Start(){
-	
-	}
-
-	// Update is called once per frame
-	void Update () {
-
+		HexMap TestMap = new HexMap ();
+		TestMap = MapXml.LoadMap ("Test");
+		TestMap.Draw ();
 	}
 }

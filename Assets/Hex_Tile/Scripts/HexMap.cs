@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-public class HexMap
+public class HexMap : ScriptableObject
 {
 	public Dictionary<Vector2,HexGrids> Grids=new Dictionary<Vector2, HexGrids>();
+	public int ID{ get; set;}
 	public string Name{ get; set;}
 	public string Author{ get; set;}
 	public string Version{ get; set;}
-	public int Grade{ get; set;}
-	public float Radius{ get; set;}
+	public double Radius{ get; set;}
+
 	public HexGrids GetGrid(Vector2 Pos)
 	{
 		if (Grids.ContainsKey (Pos))
@@ -24,6 +26,9 @@ public class HexMap
 
 	public void Draw()
 	{
+		Debug.Log ("Start Drawing Map" + Name);
+		Debug.Log ("Author" + Author);
+		Debug.Log ("Version" + Version);
 		foreach (HexGrids G in Grids.Values) 
 		{
 			DrawAGrid (G);
@@ -33,17 +38,25 @@ public class HexMap
 
 	public void DrawAGrid(HexGrids Grid)
 	{
-		Debug.Log ("Draw A Grid Pos:" + Grid.Position + " Height:" + Grid.Height + " LandForm:" + Grid.Land);
+		Debug.Log ("Draw A Grid Pos:" + Grid.Position + " Height:" + Grid.Height + " LandForm:" + Grid.Land.Name);
+		Radius = 2.74/2.0;
+		double sRadius = Radius * Mathf.Sqrt (3) * 0.5;
+		Debug.Log ("a=" + Radius + ",b=" + sRadius);
+		Vector3 GPos = new Vector3 ((2.0f * Grid.Position.x - Grid.Position.y) * (float)sRadius,Grid.Height*(1.46f), (-1.5f) * Grid.Position.y * (float)Radius);
+		Object o = Resources.LoadAssetAtPath("Assets/Hex_Tile/Resource/hexagon.prefab",typeof(GameObject));
+		GameObject goAGrid =(GameObject)Instantiate(o);
+		GameObject go=GameObject.Find ("Grids");
+		goAGrid.transform.parent = go.transform;
+		goAGrid.transform.position=GPos;
 	}
-
 	Dictionary<string,Vector2> Direction=new Dictionary<string, Vector2>()
 	{
-		{"TopLeft",new Vector2(-1,1)},
+		{"TopLeft",new Vector2(0,-1)},
 		{"Left",new Vector2(-1,0)},
-		{"BotLeft",new Vector2(0,-1)},
-		{"BotRight",new Vector2(1,-1)},
+		{"BotLeft",new Vector2(-1,1)},
+		{"BotRight",new Vector2(0,1)},
 		{"Right",new Vector2(1,0)},
-		{"TopRight",new Vector2(0,1)}
+		{"TopRight",new Vector2(1,-1)}
 	};
 
 	public List<HexGrids> Neighbours(Vector2 Center)
@@ -115,8 +128,4 @@ public class HexMap
 
 	}
 
-	public void LoadMap(string MapName)
-	{
-
-	}
 }

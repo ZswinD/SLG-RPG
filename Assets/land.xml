@@ -1,0 +1,8 @@
+<land>
+  <landform>
+    <default id="0" eff="0,1;" />
+  </landform>
+  <landeffect>
+    <null id="0" key="null" desc="TestEffect" />
+  </landeffect>
+</land>

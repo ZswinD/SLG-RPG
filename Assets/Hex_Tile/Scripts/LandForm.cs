@@ -2,25 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class LandForm
+public class LandForm:ScriptableObject
 {
+	public int ID{ get; set;}
 	public string Name{ get; set;}
-	public int NumOfEffect{ get; set;}
-	public List<LandEffect> Effect;
+	public Dictionary<int,float> Effect;
 
-	public LandForm(int i)
+	public LandForm()
 	{
-		NumOfEffect = i;
-		Effect = new List<LandEffect> (i);
+		ID = 0;
+		Effect = new Dictionary<int,float>();
+		Name = "default";
 	}
-	public LandForm():this(0){Name = "default";}
-	public LandForm(string name,int i):this(i)
+
+	public string PrintInfo()
 	{
-		Name = name;
-	}
-	public LandForm LoadLand(string LandName)
-	{
-		Debug.Log ("Load Landform from datebase...");
-		return new LandForm ();
+		string strInfo = "LandForm Info :\n";
+		foreach (int leId in Effect.Keys) {
+
+		}
+		strInfo+=("End LandInfo");
+		return strInfo;
 	}
 }

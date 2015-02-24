@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[SerializeField]
-
 public class HexGrids
 {
 	public Object Cell{ get; set;}
@@ -23,13 +21,12 @@ public class HexGrids
 		Cell = default(Object);
 		Position = Vector2.zero;
 		Height = H;
-		Land = new LandForm ();
+		Land = ScriptableObject.CreateInstance <LandForm>();
 		Status = 0;
 	}
 
-	public HexGrids(Object C,Vector2 Pos,int H) :this(H)
+	public HexGrids(Vector2 Pos,int H) :this(H)
 	{
-		Cell=C;
 		Position=Pos;
 		Status = 1;
 	}
