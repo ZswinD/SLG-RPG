@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GridClick : MonoBehaviour {
-
+	public Button AB;
 	// Use this for initialization
 	void Start () {
 	
@@ -13,7 +16,8 @@ public class GridClick : MonoBehaviour {
 	
 	}
 
-	void OnClick(){
+	public void ABC(){
+		AB = gameObject.GetComponent<Button> ();
 		Debug.Log ("123");
 	}
 }
