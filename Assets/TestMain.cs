@@ -3,9 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TestMain : MonoBehaviour {
+
+	public HexMap Map;
+	public int TestStatus=1;
+
 	void Start(){
-		HexMap TestMap = new HexMap ();
-		TestMap = MapXml.LoadMap ("Test");
-		TestMap.Draw ();
+		Map = ScriptableObject.CreateInstance <HexMap>();
+		Map=MapXml.LoadMap ("Default");
+		if(Map!=null)
+		Map.Draw ();
+		GridControl.Status = TestStatus;
 	}
 }

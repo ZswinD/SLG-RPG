@@ -1,23 +1,24 @@
 using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-public class HexMap : ScriptableObject
+
+public class HexMap:ScriptableObject
 {
 	public Dictionary<Vector2,HexGrids> Grids=new Dictionary<Vector2, HexGrids>();
 	public int ID{ get; set;}
 	public string Name{ get; set;}
 	public string Author{ get; set;}
 	public string Version{ get; set;}
-	public double Radius{ get; set;}
+	static double Radius= 2.74*0.5;
+	static double sRadius = Radius * Mathf.Sqrt (3) * 0.5;
 
 	public HexGrids GetGrid(Vector2 Pos)
 	{
 		if (Grids.ContainsKey (Pos))
 						return Grids [Pos];
 				else
-						return HexGrids.NullGrid;
+						return null;
 	}
 	public Object GetCell(Vector2 Pos)
 	{
@@ -38,39 +39,65 @@ public class HexMap : ScriptableObject
 
 	public void DrawAGrid(HexGrids Grid)
 	{
-		Debug.Log ("Draw A Grid Pos:" + Grid.Position + " Height:" + Grid.Height + " LandForm:" + Grid.Land.Name);
-		Radius = 2.74/2.0;
-		double sRadius = Radius * Mathf.Sqrt (3) * 0.5;
-		Debug.Log ("a=" + Radius + ",b=" + sRadius);
-		Vector3 GPos = new Vector3 ((2.0f * Grid.Position.x - Grid.Position.y) * (float)sRadius,Grid.Height*(1.46f), (-1.5f) * Grid.Position.y * (float)Radius);
+		Vector3 GPos = new Vector3 ((2.0f * Grid.Position.x + Grid.Position.y) * (float)sRadius,Grid.Height*(1.46f), (-1.5f) * Grid.Position.y * (float)Radius);
 		Object o = Resources.LoadAssetAtPath("Assets/Hex_Tile/Resource/hexagon.prefab",typeof(GameObject));
-		GameObject goAGrid =(GameObject)Instantiate(o);
+		GameObject goAGrid =(GameObject)GameObject.Instantiate(o);
 		GameObject go=GameObject.Find ("Grids");
 		goAGrid.transform.parent = go.transform;
 		goAGrid.transform.position=GPos;
+		GridControl goControl = goAGrid.GetComponent<GridControl> ();
+		goControl.Pos = Grid.Position;
+		goControl.z = Grid.Height;
+		Grid.gcGrid= goAGrid.GetComponent<GridControl>() ;
 	}
-	Dictionary<string,Vector2> Direction=new Dictionary<string, Vector2>()
+	Dictionary<int,Vector2> Direction=new Dictionary<int, Vector2>()
 	{
-		{"TopLeft",new Vector2(0,-1)},
-		{"Left",new Vector2(-1,0)},
-		{"BotLeft",new Vector2(-1,1)},
-		{"BotRight",new Vector2(0,1)},
-		{"Right",new Vector2(1,0)},
-		{"TopRight",new Vector2(1,-1)}
+		{1,new Vector2(0,-1)},
+		{2,new Vector2(-1,0)},
+		{3,new Vector2(-1,1)},
+		{4,new Vector2(0,1)},
+		{5,new Vector2(1,0)},
+		{6,new Vector2(1,-1)}
 	};
 
-	public List<HexGrids> Neighbours(Vector2 Center)
+	public List<Vector2> Neighbours(Vector2 Center)
 	{
-		List<HexGrids> TempN =new List<HexGrids>();
-		foreach(string s in Direction.Keys){
-						TempN.Add (GetGrid (Center+Direction[s]));
+		List<Vector2> TempN =new List<Vector2>();
+		foreach(int i in Direction.Keys){
+			if(GetGrid (Center+Direction[i])!=null)
+						TempN.Add (Center+Direction[i]);
 				}
 		return TempN;
 	}
 
-	public HexGrids GetDirection(Vector2 Center,string direct)
+	public HexGrids GetDirection(Vector2 Center,int i)
 	{
-		return GetGrid (Center + Direction [direct]);
+		return GetGrid (Center + Direction [i]);
+	}
+
+	public List<Vector2> Ring(Vector2 RCenter,int RR)
+	{
+		List<Vector2> RingTemp = new List<Vector2> ();
+		Vector2 PosTemp = RCenter + Direction [5] * RR;
+		RingTemp.Add (PosTemp);
+		for (int i=1; i<=Direction.Count; i++) {
+			for(int j=0;j<RR;j++)
+			{
+				if(i==6&&j==RR-1)continue;
+				PosTemp=PosTemp+Direction[i];
+				RingTemp.Add (PosTemp);
+			}
+		}
+		return RingTemp;
+	}
+	public List<Vector2> Area(Vector2 ACenter,int AR)
+	{
+		List<Vector2> AreaTemp = new List<Vector2> ();
+		for (int i=0; i<=AR; i++) {
+			foreach(Vector2 pos in Ring (ACenter,i))
+				AreaTemp.Add (pos);
+		}
+		return AreaTemp;
 	}
 
 	//Distance means distance on the map without blocks
@@ -90,6 +117,7 @@ public class HexMap : ScriptableObject
 		return Close;
 	}
 
+	/*
 	public void ShowArea(List<HexGrids> Area,int AreaStatus)
 	{
 		foreach (HexGrids G in Area) {
@@ -97,11 +125,7 @@ public class HexMap : ScriptableObject
 		}
 		Debug.Log ("ShowArea");
 	}
-
-	public void ChangeGridObjectStatus(HexGrids Grid,int Status)
-	{
-		Debug.Log("Change Status of "+Grid.Position+" to "+Status);
-	}
+	*/
 
 	public int NeedSteps(Vector2 start,Vector2 end,Object C)
 	{

@@ -14,7 +14,7 @@ public class MapXml:ScriptableObject
 
 	public static void SaveMap(HexMap Map)
 	{
-		string Path=mapPath +"/"+Map.name+@".xml";
+		string Path=mapPath +"/"+Map.Name+@".xml";
 		if (CompareVersion (Map)) 
 		{
 			XmlDocument mapDoc = new XmlDocument();
@@ -28,9 +28,9 @@ public class MapXml:ScriptableObject
 			name.InnerText=Map.Name;
 			author.InnerText=Map.Author;
 			version.InnerText=Map.Version;
+			int i=1;
 			foreach(HexGrids g in Map.Grids.Values)
 			{
-				int i=1;
 				XmlElement temp=mapDoc.CreateElement("g"+i);
 				temp.InnerText=g.Land.ID.ToString ();
 				temp.SetAttribute("x",g.Position.x.ToString());
@@ -69,15 +69,36 @@ public class MapXml:ScriptableObject
 			TempMap.Name=name.InnerText;
 			TempMap.Author=author.InnerText;
 			TempMap.Version=version.InnerText;
+			LandXml.LoadLandFile();
 			foreach(XmlElement gn in grids.ChildNodes)
 			{
 				Vector2 TempPos=new Vector2(float.Parse (gn.GetAttribute ("x")),float.Parse (gn.GetAttribute ("y")));
 				HexGrids TempGrid=new HexGrids(TempPos,int.Parse (gn.GetAttribute("h")));
-				TempGrid.Land=LandXml.LoadLandFile()[int.Parse (gn.InnerText)];
+				TempGrid.Land=LandXml.LandFormDict[int.Parse (gn.InnerText)];
 				TempMap.Grids.Add (TempPos,TempGrid);
 			}
 		}
+		else
+		{
+			Debug.Log ("File Not Exists");
+			return null;
+		}
 		return TempMap;
+	}
+	public static HexMap InitMap(int id,string name,int r)
+	{
+				HexMap Map = ScriptableObject.CreateInstance <HexMap> ();
+				List<Vector2> GridPos = Map.Area (Vector2.zero, r);
+				foreach (Vector2 pos in GridPos) {
+						HexGrids gTemp = new HexGrids (pos, 1);
+						Map.Grids.Add (pos, gTemp);
+				}
+				Map.ID = id;
+				Map.Author = "Nameless";
+				Map.Name = name;
+				Map.Version = "0.0.1";
+				MapXml.SaveMap (Map);
+		return Map;
 	}
 
 	public static bool CompareVersion(HexMap HMap)

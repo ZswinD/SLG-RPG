@@ -54,12 +54,12 @@ public class LandXml:ScriptableObject
 			Debug.Log("Already init Landfile!");
 	}
 
-	public static Dictionary<int,LandForm> LoadLandFile()
+	public static void LoadLandFile()
 	{
 		Dictionary<int,LandForm> LandFormList = new Dictionary<int,LandForm>();
 		if(File.Exists(landPath))
 		{
-			Debug.Log ("Loading");
+			Debug.Log ("Loading LandFile");
 			XmlDocument landDoc=new XmlDocument();
 			landDoc.Load (landPath);
 			XmlNode root=landDoc.SelectSingleNode ("land");
@@ -80,17 +80,17 @@ public class LandXml:ScriptableObject
 					LandFormList.Add (landformTemp.ID,landformTemp);
 				}
 			}
+			LandFormDict=LandFormList;
 		}
 		else
 		{
 			Debug.Log ("no LandFile");
 			initLandFile();
-			return LoadLandFile();
+			LoadLandFile ();
 		}
-		return LandFormList;
 	}
 
-	public static Dictionary<int,LandEffect> LoadLandEffect()
+	public static void LoadLandEffect()
 	{
 		Dictionary<int,LandEffect> LandEffectList = new Dictionary<int,LandEffect>();
 		if(File.Exists(landPath))
@@ -108,13 +108,13 @@ public class LandXml:ScriptableObject
 				landeffectTemp.Desc=leEle.GetAttribute ("desc");
 				LandEffectList.Add(landeffectTemp.ID,landeffectTemp);
 			}
+			LandEffectDict=LandEffectList;
 		}
 		else
 		{
 			initLandFile();
-			return LoadLandEffect();
+			LoadLandEffect();
 		}
-		return LandEffectList;
 	}
 
 	public static void SaveLandFile(Dictionary<int,LandForm> LandFormList,Dictionary<int,LandEffect> LandEffectList)
@@ -155,6 +155,7 @@ public class LandXml:ScriptableObject
 
 	public static void ChangeLandEffect(LandEffect LE,bool IsChange)
 	{
-		Dictionary<int,LandEffect> LandEffectList = LoadLandEffect ();
+		LoadLandEffect();
+		
 	}
 }

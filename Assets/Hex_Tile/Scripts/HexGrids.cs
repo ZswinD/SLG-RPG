@@ -8,11 +8,7 @@ public class HexGrids
 	public Vector2 Position{ get; set;}
 	public int Height{ get;set;}
 	public LandForm Land{ get; set;}
-	public int Status{ get; set;}
-	//Hightlight Layer,OutLine Layer and Ground Layer;
-	public GameObject Highlight{ get; set;}
-	public GameObject Outline{ get; set;}
-	public GameObject Ground{ get; set;}
+	public GridControl gcGrid;
 
 	public static HexGrids NullGrid{get{return new HexGrids(-1);}}
 
@@ -22,13 +18,11 @@ public class HexGrids
 		Position = Vector2.zero;
 		Height = H;
 		Land = ScriptableObject.CreateInstance <LandForm>();
-		Status = 0;
 	}
 
 	public HexGrids(Vector2 Pos,int H) :this(H)
 	{
 		Position=Pos;
-		Status = 1;
 	}
 
 }
