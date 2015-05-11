@@ -39,15 +39,14 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>D:/ozy/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/ozy/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Hex_Tile\Scripts\AttackMode.cs" />
-     <Compile Include="Assets\Hex_Tile\Scripts\Character.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\GridControl.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\HexGrids.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\HexMap.cs" />
@@ -55,7 +54,13 @@
      <Compile Include="Assets\Hex_Tile\Scripts\LandForm.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\LandXml.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\MapXml.cs" />
+     <Compile Include="Assets\Scripts\Cube.cs" />
      <Compile Include="Assets\TestMain.cs" />
+     <Compile Include="Assets\War\Scripts\Attack.cs" />
+     <Compile Include="Assets\War\Scripts\Character.cs" />
+     <Compile Include="Assets\War\Scripts\Puzzle.cs" />
+     <Compile Include="Assets\War\Scripts\Skill.cs" />
+     <Compile Include="Assets\War\Scripts\War.cs" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Default.xml" />
      <None Include="Assets\land.xml" />
@@ -64,7 +69,7 @@
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
  <Reference Include="UnityEngine.UI">
- <HintPath>F:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/ozy/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

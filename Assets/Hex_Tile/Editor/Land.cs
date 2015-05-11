@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
@@ -38,19 +38,30 @@ public class Land:EditorWindow
 			fold[count]=EditorGUILayout.Foldout(fold[count],lf.Name);
 			if(fold[count])
 			{
+				List<bool> efold=new List<bool>(lf.Effect.Count);
 				EditorGUILayout.BeginVertical ();
 				EditorGUILayout.LabelField ("ID",lf.ID.ToString ());
 				EditorGUILayout.LabelField("Name",lf.Name);
 				innerfold[count]=EditorGUILayout.Foldout (innerfold[count],"Effects");
 				if(innerfold[count])
 				{
+					int Ecount=0;
+					Dictionary<int,float> lfEffect=new Dictionary<int, float>(lf.Effect);
 					foreach(int eID in lf.Effect.Keys)
 					{
-
+						//efold[Ecount]=EditorGUILayout.Foldout(efold[Ecount],"Effect "+Ecount.ToString());
+						//if(efold[Ecount]){
+						EditorGUILayout.LabelField("Effect Name",LandEffectDict[eID].Name);
+						EditorGUILayout.LabelField("Effect Key",LandEffectDict[eID].Key);
+						lfEffect[eID]=EditorGUILayout.FloatField("Effect Value",lfEffect[eID]);
+						Ecount++;
+						//}
 					}
+					lf.Effect =lfEffect;
 				}
 				EditorGUILayout.EndVertical ();
 			}
+			count++;
 		}
 	}
 }
