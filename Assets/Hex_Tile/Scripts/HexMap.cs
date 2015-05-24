@@ -3,15 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class HexMap:ScriptableObject
+public class HexMap
 {
-	public Dictionary<Vector2,HexGrids> Grids=new Dictionary<Vector2, HexGrids>();
+	Dictionary<Vector2,HexGrids> Grids=new Dictionary<Vector2, HexGrids>();
 	public int ID{ get; set;}
 	public string Name{ get; set;}
 	public string Author{ get; set;}
 	public string Version{ get; set;}
 	static double Radius= 2.74*0.5;
 	static double sRadius = Radius * Mathf.Sqrt (3) * 0.5;
+
+	public void Init(int r)
+	{
+		List<Vector2> MapArea = Area (Vector2.zero, r);
+		for (int i=0; i<MapArea.Count; i++) 
+		{
+			AppendGrid (MapArea[i],HexGrids.DefaultGrid);
+		}
+	}
+
+	public bool HasGrid(Vector2 Pos)
+	{
+		return Grids.ContainsKey (Pos);
+	}
+
+	public Dictionary<Vector2,HexGrids> GetAllGrids()
+	{
+		return Grids;
+	}
 
 	public HexGrids GetGrid(Vector2 Pos)
 	{
@@ -20,6 +39,12 @@ public class HexMap:ScriptableObject
 				else
 						return null;
 	}
+
+	public void AppendGrid(Vector2 Pos,HexGrids AGrid)
+	{
+		Grids.Add (Pos, AGrid);
+	}
+
 	public Object GetCell(Vector2 Pos)
 	{
 		return GetGrid (Pos).Cell;
@@ -30,25 +55,27 @@ public class HexMap:ScriptableObject
 		Debug.Log ("Start Drawing Map" + Name);
 		Debug.Log ("Author" + Author);
 		Debug.Log ("Version" + Version);
-		foreach (HexGrids G in Grids.Values) 
+		foreach (Vector2 gPos in Grids.Keys) 
 		{
-			DrawAGrid (G);
+			DrawAGrid (gPos);
 		}
 		Debug.Log ("Finish Draw the Map");
 	}
 
-	public void DrawAGrid(HexGrids Grid)
+	public void DrawAGrid(Vector2 GridPos)
 	{
-		Vector3 GPos = new Vector3 ((2.0f * Grid.Position.x + Grid.Position.y) * (float)sRadius,Grid.Height*(1.46f), (-1.5f) * Grid.Position.y * (float)Radius);
+		int height = GetGrid (GridPos).Height;
+		Vector3 GPos = new Vector3 ((2.0f * GridPos.x + GridPos.y) * (float)sRadius,height*(1.46f), (-1.5f) * GridPos.y * (float)Radius);
 		Object o = Resources.LoadAssetAtPath("Assets/Hex_Tile/Resource/hexagon.prefab",typeof(GameObject));
 		GameObject goAGrid =(GameObject)GameObject.Instantiate(o);
 		GameObject go=GameObject.Find ("Grids");
 		goAGrid.transform.parent = go.transform;
 		goAGrid.transform.position=GPos;
 		GridControl goControl = goAGrid.GetComponent<GridControl> ();
-		goControl.Pos = Grid.Position;
-		goControl.z = Grid.Height;
-		Grid.gcGrid= goAGrid.GetComponent<GridControl>() ;
+		goControl.Pos = new Vector2(GridPos.x,GridPos.y);
+		goControl.z = GetGrid(GridPos).Height;
+		goControl.Grid = GetGrid (GridPos);
+		Grids [GridPos].Control = goControl;
 	}
 	Dictionary<int,Vector2> Direction=new Dictionary<int, Vector2>()
 	{

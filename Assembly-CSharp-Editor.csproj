@@ -46,7 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Hex_Tile\Editor\Land.cs" />
+     <Compile Include="Assets\Editor\DescManager\DescManager.cs" />
+     <Compile Include="Assets\Editor\Legecy\LandXml.cs" />
+     <Compile Include="Assets\Editor\Legecy\MapXml.cs" />
+     <Compile Include="Assets\Editor\MenuItem.cs" />
      <Compile Include="Assets\Hex_Tile\Editor\Map.cs" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Default.xml" />
@@ -57,6 +60,9 @@
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/ozy/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="LitJson">
+ <HintPath>D:/ozy/SLG-RPG/Assets/Plugins/LitJson.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>D:/ozy/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -90,6 +96,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{3876DA2B-7975-0539-1730-103901121ED7}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{4C746931-1CBB-C4AC-DA4D-0BBA21EE8384}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
