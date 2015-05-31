@@ -7,70 +7,67 @@ public class LandManager{
 	public static Dictionary<int,LandForm> LandFormDict=new Dictionary<int,LandForm>();
 	public static Dictionary<int,LandEffect> LandEffectDict=new Dictionary<int,LandEffect>();
 
-	public static AllLandFormData DataToLFObject (Dictionary<int,LandForm> LandFormDict)
+	public static LandFormData DataToLFObject (Dictionary<int,LandForm> LandFormDict)
 	{
-		Debug.Log (LandFormDict.Count);
 		LandFormData LFData=ScriptableObject.CreateInstance<LandFormData>();
-		AllLandFormData AllLFData=ScriptableObject.CreateInstance<AllLandFormData>();
 		foreach (int i in LandFormDict.Keys) 
 		{
-			LFData.ID=i;
-			LFData.Name=LandFormDict[i].Name;
-			foreach (int j in LandFormDict[i].Effect.Keys) {
-				LFData.EffectID.Add (j);
-				LFData.EffectValue.Add(LandFormDict[i].Effect[j]);
+			LFData.ID.Add(i);
+			LFData.Name.Add(LandFormDict[i].Name);
+			DictionaryOfIntAndFloat doifTemp=new DictionaryOfIntAndFloat();
+			foreach(var ele in LandFormDict[i].Effect) {
+				doifTemp.Add (ele.Key,ele.Value);
 			}
-			AllLFData.AllLandForm.Add (LFData);
+			LFData.Effect.Add (doifTemp);
 		}
-		Debug.Log (AllLFData.AllLandForm.Count);
-		return AllLFData;
+		return LFData;
 	}
 
-	public static AllLandEffectData DataToLEObject (Dictionary<int,LandEffect> LandEffectDict)
+	public static LandEffectData DataToLEObject (Dictionary<int,LandEffect> LandEffectDict)
 	{
 		LandEffectData LEData=ScriptableObject.CreateInstance<LandEffectData>();
-		AllLandEffectData AllLEData=ScriptableObject.CreateInstance<AllLandEffectData>();
 		foreach (int i in LandEffectDict.Keys) 
 		{
-			LEData.ID=i;
-			LEData.Effect=LandEffectDict[i];
+			LEData.ID.Add (i);
+			LEData.Name.Add (LandEffectDict[i].Name);
+			LEData.Key.Add (LandEffectDict[i].Key);
+			LEData.Desc.Add (LandEffectDict[i].Desc);
 		}
-		AllLEData.AllLandEffect.Add (LEData);
-		return AllLEData;
+		return LEData;
 	}
 
-	public static Dictionary<int,LandForm> LFObjectToData(AllLandFormData AllLFData)
+	public static Dictionary<int,LandForm> LFObjectToData(LandFormData LFData)
 	{
 		Dictionary<int,LandForm> LFDictTemp = new Dictionary<int, LandForm> ();
-		Debug.Log (AllLFData.AllLandForm[0]);
-		for (int i=0; i<AllLFData.AllLandForm.Count; i++) 
+		for (int i=0;i<LFData.ID.Count;i++) 
 		{
 			LandForm LFTemp=new LandForm();
-			LFTemp.ID=AllLFData.AllLandForm[i].ID;
-			LFTemp.Name=AllLFData.AllLandForm[i].Name;
-			for(int j=0;j<AllLFData.AllLandForm[i].EffectID.Count;j++)
+			LFTemp.ID=LFData.ID[i];
+			LFTemp.Name=LFData.Name[i];
+			foreach(var ele in LFData.Effect[i])
 			{
-				LFTemp.Effect.Add (AllLFData.AllLandForm[i].EffectID[j],AllLFData.AllLandForm[i].EffectValue[j]);
+				LFTemp.Effect.Add (ele.Key,ele.Value);
 			}
-			LFDictTemp.Add (AllLFData.AllLandForm[i].ID,LFTemp);
+			LFDictTemp.Add (LFTemp.ID,LFTemp);
 		}
 		return LFDictTemp;
 	}
 
-	public static Dictionary<int,LandEffect> LEObjectToData(AllLandEffectData AllLEData)
+	public static Dictionary<int,LandEffect> LEObjectToData(LandEffectData LEData)
 	{
 		Dictionary<int,LandEffect> LEDictTemp = new Dictionary<int, LandEffect> ();
-		for (int i=0; i<AllLEData.AllLandEffect.Count; i++) 
+		for (int i=0; i<LEData.ID.Count; i++) 
 		{
-			LEDictTemp.Add (AllLEData.AllLandEffect[i].ID,AllLEData.AllLandEffect[i].Effect);
+		    LandEffect ETemp=new LandEffect(LEData.ID[i],LEData.Name[i],LEData.Key[i],LEData.Desc[i]);
+			LEDictTemp.Add (ETemp.ID,ETemp);
 		}
 		return LEDictTemp;
 	}
 
-	public static void LoadLandObject(AllLandFormData ALFD, AllLandEffectData ALED)
+	public static void LoadLandObject(LandFormData LFD, LandEffectData LED)
 	{
-		LandFormDict = LFObjectToData (ALFD);
-		LandEffectDict = LEObjectToData (ALED);
+		LandFormDict = LFObjectToData (LFD);
+		LandEffectDict = LEObjectToData (LED);
 	}
 
 	public static Dictionary<int,LandForm> LoadLandForm(JsonData LandFormData)

@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 3339246633
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3ebbb98a6737dc8b3d01cb16453f6a16
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2cc8eb504dfa1f91a2a71d442b039ea0
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 8ba7da87d44ebe145857c8b96317887b, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Data/LandEffect.asset
+Dependencies: []

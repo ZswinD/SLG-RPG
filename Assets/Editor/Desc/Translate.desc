@@ -1,0 +1,14 @@
+﻿{
+		"player": {
+			"en": "player",
+			"cn": "玩家"
+		},
+		"enemy": {
+			"en": "enemy",
+			"cn": "敌人"
+		},
+		"attack_info": {
+			"en": "'attacker' attack 'deffecer'!",
+			"cn": "'attacker' 攻击了 'deffecer'!"
+		}
+}

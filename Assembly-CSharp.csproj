@@ -46,8 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Hex_Tile\Scripts\AllLandEffectData.cs" />
-     <Compile Include="Assets\Hex_Tile\Scripts\AllLandFormData.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\AttackMode.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\GridControl.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\HexGrids.cs" />
@@ -59,13 +57,15 @@
      <Compile Include="Assets\Hex_Tile\Scripts\LandManager.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\MapData.cs" />
      <Compile Include="Assets\Hex_Tile\Scripts\MapManager.cs" />
+     <Compile Include="Assets\Hex_Tile\Scripts\SerializableDictionary.cs" />
+     <Compile Include="Assets\Scripts\CmdSys.cs" />
      <Compile Include="Assets\Scripts\Cube.cs" />
      <Compile Include="Assets\TestMain.cs" />
      <Compile Include="Assets\TestScripts\TestClass.cs" />
      <Compile Include="Assets\Translate\TransManager.cs" />
-     <Compile Include="Assets\War\Scripts\Attack.cs" />
      <Compile Include="Assets\War\Scripts\Character.cs" />
      <Compile Include="Assets\War\Scripts\Puzzle.cs" />
+     <Compile Include="Assets\War\Scripts\SimpleWarMap.cs" />
      <Compile Include="Assets\War\Scripts\Skill.cs" />
      <Compile Include="Assets\War\Scripts\War.cs" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
@@ -81,10 +81,6 @@
  <Reference Include="LitJson">
  <HintPath>D:/ozy/SLG-RPG/Assets/Plugins/LitJson.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{3876DA2B-7975-0539-1730-103901121ED7}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

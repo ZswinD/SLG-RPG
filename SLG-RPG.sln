@@ -1,8 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{89964CA7-C3D0-FFEC-0D3A-3433CCEF0247}") = "SLG-RPG", "Assembly-CSharp-firstpass.csproj", "{3876DA2B-7975-0539-1730-103901121ED7}"
-EndProject
 Project("{89964CA7-C3D0-FFEC-0D3A-3433CCEF0247}") = "SLG-RPG", "Assembly-CSharp.csproj", "{4C746931-1CBB-C4AC-DA4D-0BBA21EE8384}"
 EndProject
 Project("{89964CA7-C3D0-FFEC-0D3A-3433CCEF0247}") = "SLG-RPG", "Assembly-CSharp-Editor.csproj", "{EDC769A4-D74C-EB6D-2774-C1AA5D9A4E23}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3876DA2B-7975-0539-1730-103901121ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3876DA2B-7975-0539-1730-103901121ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3876DA2B-7975-0539-1730-103901121ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3876DA2B-7975-0539-1730-103901121ED7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4C746931-1CBB-C4AC-DA4D-0BBA21EE8384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C746931-1CBB-C4AC-DA4D-0BBA21EE8384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C746931-1CBB-C4AC-DA4D-0BBA21EE8384}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																													GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																		GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

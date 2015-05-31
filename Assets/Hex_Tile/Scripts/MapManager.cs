@@ -2,7 +2,7 @@
 using System.Collections;
 using LitJson;
 using System.Collections.Generic;
-//
+
 //[System.Serializable]
 //public class MapData:ScriptableObject{
 //	
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 //	public List<Vector2> GridsPos=new List<Vector2>();
 //	public List<int> GridsHeight=new List<int>();
 //	public List<int> GridsLand = new List<int> ();
-//
+//	
 //}
 
 public class MapManager{
@@ -79,5 +79,4 @@ public class MapManager{
 		Debug.Log ("Tanslating Map To Json");
 		return Data;
 	}
-
 }

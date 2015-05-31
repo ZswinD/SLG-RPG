@@ -31,19 +31,19 @@ public class DescManager
 			AssetDatabase.CreateAsset(sObject,finPath);
 			break;
 		case("LandForm"):
-			sObject=ScriptableObject.CreateInstance<AllLandFormData>();
+			sObject=ScriptableObject.CreateInstance<LandFormData>();
 			Dictionary<int,LandForm> LFDict=LandManager.LoadLandForm (DescData);
 			sObject =LandManager.DataToLFObject(LFDict);
 			AssetDatabase.CreateAsset(sObject,finPath);
 			break;
 		case("LandEffect"):
-			sObject=ScriptableObject.CreateInstance<AllLandEffectData>();
+			sObject=ScriptableObject.CreateInstance<LandEffectData>();
 			Dictionary<int,LandEffect> LEDict=LandManager.LoadLandEffect (DescData);
 			sObject =LandManager.DataToLEObject(LEDict);
 			AssetDatabase.CreateAsset(sObject,finPath);
 			break;
 		}
-		Debug.Log ("Finish Output "+objectName );
+		Debug.Log ("Finish Output "+objectName);
 	}
 
 	public static void AllDescToObject()
@@ -54,7 +54,6 @@ public class DescManager
 			JsonData DescData=ControlData[i];
 			DescToObject(DescData["descName"].ToString (),DescData["descClass"].ToString (),DescData["objectName"].ToString ());
 		}
-		AssetDatabase.SaveAssets ();
 		Debug.Log ("Finish All Desc Translate!");
 	}
 
@@ -99,11 +98,10 @@ public class DescManager
 	{
 		ControlData = DescTOJson (ControlFileName);
 		AssetBundleBuild[] BuildMap=new AssetBundleBuild[1];
-		BuildMap[0].assetBundleName="SORes";
+		BuildMap[0].assetBundleName="sores";
 		List<string> ResourceAssets = new List<string> ();
 		for(int i=0;i<ControlData.Count;i++)
 		{
-			Debug.Log (ObjectPath+ControlData[i]["objectName"]);
 			ResourceAssets.Add (ObjectPath+ControlData[i]["objectName"]+".asset");
 		}
 		BuildMap [0].assetNames = ResourceAssets.ToArray ();

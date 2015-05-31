@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 1719704736
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c8a14f8394b4a767f02d404914675c04
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6f7954ae1cd733f4125e2bba47f60de8
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: dcb9298499527e242bbba4ee675bb06e, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Data/LandForm.asset
+Dependencies: []
