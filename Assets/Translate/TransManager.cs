@@ -5,6 +5,12 @@ using System.IO;
 using System.Text.RegularExpressions;
 using LitJson;
 
+public enum MyLanguage{
+	Chinese=0,
+	English=1,
+	Japanese=2
+}
+
 public class TransManager{
 
 	public static string LangDeffult="cn";

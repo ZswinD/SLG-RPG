@@ -1,14 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\War\Scripts\SimpleWarMap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\War\Scripts\SimpleWar.cs">
     <Files>
-      <File FileName="Assets\War\Scripts\SimpleWarMap.cs" Line="9" Column="1" />
-      <File FileName="Assets\Translate\TransManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Editor\TestTime.cs" Line="1" Column="1" />
-      <File FileName="Assets\TestMain.cs" Line="1" Column="1" />
-      <File FileName="Assets\Editor\DescManager\DescManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\War\Scripts\War.cs" Line="25" Column="3" />
-      <File FileName="Assets\War\Scripts\Skill.cs" Line="1" Column="1" />
+      <File FileName="Assets\War\Scripts\SimpleWar.cs" Line="88" Column="25" />
+      <File FileName="Assets\Scripts\SimpleWarTest.cs" Line="54" Column="58" />
+      <File FileName="Assets\War\Scripts\InSimpleWarManager.cs" Line="16" Column="17" />
+      <File FileName="Assets\War\Scripts\Character.cs" Line="50" Column="71" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

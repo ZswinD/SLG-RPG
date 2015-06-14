@@ -17,7 +17,7 @@ public class TestMain : MonoBehaviour {
 	void Start(){
 //		GridControl.Status = TestStatus;
 //		TestClass to = ScriptableObject.CreateInstance<TestClass> ();
-		//StartCoroutine (Test ("Map", "TestMap.asset"));
+		StartCoroutine (Test ("Map", "TestMap.asset"));
 		TransManager t = new TransManager ("");
 		Dictionary<string,string> s = new Dictionary<string, string> ();
 		s.Add ("attacker", "player");

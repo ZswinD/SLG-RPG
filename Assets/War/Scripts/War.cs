@@ -5,15 +5,8 @@ using CmdSys;
 
 public class WarData
 {
-	List<Character> AllChar=new List<Character>();
-	List<WarCmd> TurnStartCmd=new List<WarCmd>();
-	List<WarCmd> ActionStartCmd=new List<WarCmd>();
-	List<WarCmd> BeforeAttackCmd=new List<WarCmd>();
-	List<WarCmd> AttackingCmd=new List<WarCmd>();
-	List<WarCmd> AfterAttackCmd=new List<WarCmd>();
-	List<WarCmd> TurnEndCmd=new List<WarCmd>();
 	public delegate void EventHandler(string CmdName,string[] CmdArgs);
-	public event EventHandler Event;
+	public event EventHandler WarEvent;
 }
 
 public class WarCmd:Command
@@ -33,129 +26,28 @@ public class WarCmd:Command
 	public void LOG(){Debug.Log ("LOG");}
 }
 
-public class War{
+public abstract class War{
 
-	bool IsWarEnd;
-	bool ISSimpleWar=true;
-	WarData data;
-	List<WarData> DataList;
+	protected bool IsWarEnd;
+	protected WarData data;
+	protected ActionBar ATB;
 
+	public abstract void LoadData(WarData wardata);
 
-	public void DoSLGWar()
-	{
-		ISSimpleWar = false;
-		WarStart ();
-		ShowWarInfo ();
-		while (!IsWarEnd) 
-		{
-			Character Next = CalcNextChar ();
-			CharDoAction (Next);
-			CalcAction ();
-			IsWarEnd = IfWarEnd();
-		}
-	}
+	public abstract void WarStart ();
 
-	public void DoSimpleWar()
-	{
-		ISSimpleWar = true;
-		WarStart ();
-		ShowWarInfo ();
-		while (!IsWarEnd) 
-		{
-			Character AttChar=CalcAttChar();
-			Character DefChar=CalcDefChar();
-			DoAttack(AttChar,DefChar);
-		}
-	}
+	public abstract void InitATB();
 
-	public void WarStart()
-	{
-		IsWarEnd = false;
-		if (ISSimpleWar) {
-			Character Enemy=GetEnemy();
-			data=LoadSimpleData();
-		}
-		else {
-			LoadMapData ("Test");
-			data=LoadCharData ();
-		}
-	}
+	public abstract void ShowWarInfo ();
 
-	public Character GetEnemy()
-	{
-		return new Character();
-	}
+	public abstract bool IfWarEnd ();
 
-	public WarData LoadSimpleData()
-	{
-		return new WarData ();
-	}
+	public abstract void WarEnd ();
 
-	public void LoadMapData(string MapName)
-	{
+	public abstract int WarResult();
 
-	}
+	public abstract void WarEndEffect();
 
-	public WarData LoadCharData()
-	{
-		LoadPlayerChar ();
-		LoadEnemyChar ();
-		return new WarData ();
-	}
-
-	public void LoadPlayerChar()
-	{
-
-	}
-
-	public void LoadEnemyChar()
-	{
-
-	}
-
-	public void ShowWarInfo()
-	{
-
-	}
-
-	public Character CalcNextChar()
-	{
-		return new Character ();
-	}
-
-	public Character CalcAttChar()
-	{
-		return new Character ();
-	}
-
-	public Character CalcDefChar()
-	{
-		return new Character();
-	}
-
-	public void DoAttack(Character Att ,Character Def)
-	{
-
-	}
-
-	public bool CharDoAction(Character C)
-	{
-		return true;
-	}
-
-	public void CalcAction()
-	{
-
-	}
-
-	public bool IfWarEnd()
-	{
-		return true;
-	}
-
-	public void WarEnd()
-	{
-
-	}
-
+	public abstract void ShowCharInfo();
+	
 }

@@ -135,9 +135,9 @@ public class HexMap
 
 	public List<Vector2> FindPath(Vector2 Start,Vector2 End,Object Cell)
 	{
-		float f;
-		float g;
-		float h;
+//		float f;
+//		float g;
+//		float h;
 		List<Vector2> Open=new List<Vector2>();
 		List<Vector2> Close=new List<Vector2>();
 		//A* calc path;
